@@ -19,10 +19,10 @@ if MUIMenu and MUIMenu:ClassEnabled("MUITeammate") then
 
 	Hooks:PostHook(MUITeammate, "set_revives", "MUI_Down_Panel_set_revives", function(self,revives)
 		self._mui_down_text:set_text(revives - 1)
-		 set_down_visibility(self)
+		set_down_visibility(self)
 	end)
 
 	Hooks:PostHook(MUITeammate, "set_health", "MUI_Down_Panel_set_health", function(self,...)
-		 set_down_visibility(self)
+		set_down_visibility(self)
 	end)
 end
