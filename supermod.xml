@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<mod
+    name = "MUI Down Counter"
+    description = ""
+	author = "Eightan"
+	version = "1.2"
+	blt_version = "2"
+	priority = "-1"
+	color = "0 255 255"
+	image = "mui.png"
+>
+    <update
+        provider = "mws"
+        identifier = "57392"
+        patchnotes = "https://modworkshop.net/mod/57392?tab=changelog"
+    />
+    <hooks>
+		<post hook_id="lib/managers/hudmanagerpd2" script_path="mod.lua" />
+    </hooks>
+</mod>
