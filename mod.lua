@@ -5,11 +5,11 @@ if MUIMenu and MUIMenu:ClassEnabled("MUITeammate") then
 		local team = self._muiRevS and not self._main_player
 
 		local visible = team or player
-		local show_downs = has_downs and not self._custardy
+		local show_downs = has_downs and not self._custardy and not self._ai
 		self._info_list:set_visible_panel(self._mui_down_text, visible and show_downs)
 	end
 
-	Hooks:PostHook(MUITeammate, "create_info_list", "MUI_Down_Panel_create_info_list", function(self,...)
+	Hooks:PostHook(MUITeammate, "create_info_list", "MUI_Down_Panel_create_info_list", function(self, ...)
 		self._mui_down_text = self._info_list:text({
 			vertical = "center",
 			align = "center",
@@ -18,20 +18,20 @@ if MUIMenu and MUIMenu:ClassEnabled("MUITeammate") then
 		})
 	end)
 
-	Hooks:PostHook(MUITeammate, "set_revives", "MUI_Down_Panel_set_revives", function(self,revives)
+	Hooks:PostHook(MUITeammate, "set_revives", "MUI_Down_Panel_set_revives", function(self, revives)
 		if self._mui_down_text then
 			self._mui_down_text:set_text(revives - 1)
 			set_down_visibility(self)
 		end
 	end)
 
-	Hooks:PostHook(MUITeammate, "set_health", "MUI_Down_Panel_set_health", function(self,...)
+	Hooks:PostHook(MUITeammate, "set_health", "MUI_Down_Panel_set_health", function(self, ...)
 		if self._mui_down_text then
 			set_down_visibility(self)
 		end
 	end)
 
-	Hooks:PostHook(MUITeammate, "set_condition", "MUI_Down_Panel_set_condition", function(self, icon_data, text, ...)
+	Hooks:PostHook(MUITeammate, "set_condition", "MUI_Down_Panel_set_condition", function(self, ...)
 		if self._mui_down_text then
 			set_down_visibility(self)
 		end
@@ -41,5 +41,9 @@ if MUIMenu and MUIMenu:ClassEnabled("MUITeammate") then
 		if self._mui_down_text then
 			set_down_visibility(self)
 		end
+	end)
+	
+	Hooks:PostHook(MUITeammate, "set_ai", "MUI_Down_Panel_set_ai", function(self, ...)
+		set_down_visibility(self)
 	end)
 end
