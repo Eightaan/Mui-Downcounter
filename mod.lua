@@ -1,11 +1,18 @@
 if MUIMenu and MUIMenu:ClassEnabled("MUITeammate") then
 	local function set_down_visibility(self)
-		local has_downs = self._revives ~= 1
+		if not self._mui_down_text then
+			return
+		end
+
+	    local current_revives = self._revives or 4
+		local has_downs = current_revives ~= 1
 		local player = self._main_player and self._muiRevL
 		local team = self._muiRevS and not self._main_player
 
 		local visible = team or player
 		local show_downs = has_downs and not self._custardy and not self._ai
+
+		self._mui_down_text:set_text(current_revives - 1)
 		self._info_list:set_visible_panel(self._mui_down_text, visible and show_downs)
 	end
 
